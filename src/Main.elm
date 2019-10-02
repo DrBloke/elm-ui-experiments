@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Buttons exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -30,7 +31,9 @@ view : Model -> Html Msg
 view model =
     Element.layout []
         (column [ width fill, spacing 20 ]
-            [ IntroView.view1
+            [ row [ width fill ]
+                [ Buttons.myButton NoOp ]
+            , IntroView.view1
             , IntroView.view2
             , IntroView.view3
             , IntroView.view4
