@@ -1,11 +1,12 @@
-module Main exposing (main, myElement, myRowOfStuff)
+module Main exposing (main)
 
 import Browser
-import Element exposing (Element, alignRight, centerY, el, fill, padding, rgb255, row, spacing, text, width)
+import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Html exposing (Html)
+import IntroView
 
 
 main =
@@ -27,14 +28,15 @@ init =
 
 view : Model -> Html Msg
 view model =
-    let
-        embededView =
-            case model.currentView of
-                View1 ->
-                    view1
-    in
     Element.layout []
-        embededView
+        (column [ width fill, spacing 20 ]
+            [ IntroView.view1
+            , IntroView.view2
+            , IntroView.view3
+            , IntroView.view4
+            , IntroView.view5
+            ]
+        )
 
 
 type Msg
@@ -46,27 +48,3 @@ update msg model =
     case msg of
         NoOp ->
             model
-
-
-view1 =
-    myRowOfStuff
-
-
-myRowOfStuff : Element msg
-myRowOfStuff =
-    row [ width fill, centerY, spacing 30 ]
-        [ myElement
-        , myElement
-        , el [ alignRight ] myElement
-        ]
-
-
-myElement : Element msg
-myElement =
-    el
-        [ Background.color (rgb255 240 0 245)
-        , Font.color (rgb255 255 255 255)
-        , Border.rounded 3
-        , padding 30
-        ]
-        (text "stylish!")
