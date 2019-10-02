@@ -2,6 +2,7 @@ module Buttons exposing (myButton)
 
 import Element exposing (..)
 import Element.Background as Background
+import Element.Border as Border
 import Element.Input as Input
 
 
@@ -16,6 +17,7 @@ purple =
 myButton msg =
     Input.button
         [ Background.color blue
+        , Border.rounded 5
         , Element.focused
             [ Background.color purple ]
         , paddingXY 10 5
