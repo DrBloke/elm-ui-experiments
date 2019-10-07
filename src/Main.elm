@@ -20,6 +20,7 @@ type alias Model =
 
 type View
     = View1
+    | View2
 
 
 init : Model
@@ -29,17 +30,37 @@ init =
 
 view : Model -> Html Msg
 view model =
+    let
+        mainView =
+            case model.currentView of
+                View1 ->
+                    view1
+
+                View2 ->
+                    view2
+    in
     Element.layout []
-        (column [ width fill, spacing 20 ]
-            [ row [ width fill ]
+        (column
+            [ width fill, spacing 20 ]
+            ([ row [ width fill ]
                 [ Buttons.myButton NoOp ]
-            , IntroView.view1
-            , IntroView.view2
-            , IntroView.view3
-            , IntroView.view4
-            , IntroView.view5
-            ]
+             ]
+                ++ mainView
+            )
         )
+
+
+view1 =
+    [ IntroView.view1
+    , IntroView.view2
+    , IntroView.view3
+    , IntroView.view4
+    , IntroView.view5
+    ]
+
+
+view2 =
+    []
 
 
 type Msg

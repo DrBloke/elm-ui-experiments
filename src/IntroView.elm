@@ -12,7 +12,7 @@ view1 =
         [ centerX
         , Background.color (rgb255 240 220 245)
         ]
-        (row [ paddingXY 70 20, width fill, spacing 30 ]
+        (row [ paddingXY 20 10, spacing 30 ]
             [ myElement
             , myElement
             , myElement
@@ -34,13 +34,17 @@ view2 =
         )
 
 
+style =
+    [ centerX
+    , width (px 800)
+    , Background.color (rgb255 240 220 245)
+    ]
+
+
 view3 : Element msg
 view3 =
     el
-        [ centerX
-        , width (px 800)
-        , Background.color (rgb255 240 220 245)
-        ]
+        style
         (row [ padding 20, spacing 30 ]
             [ myElement
             , myElement
@@ -88,6 +92,6 @@ myElement =
         [ Background.color (rgb255 240 0 245)
         , Font.color (rgb255 255 255 255)
         , Border.rounded 3
-        , padding 30
+        , paddingXY 30 15
         ]
-        (Element.text "stylish!")
+        (Element.text "hello")
