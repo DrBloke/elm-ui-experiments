@@ -14,7 +14,7 @@ purple =
     rgb255 240 0 245
 
 
-myButton msg =
+myButton buttonText msg =
     Input.button
         [ Background.color blue
         , Border.rounded 5
@@ -23,5 +23,5 @@ myButton msg =
         , paddingXY 10 5
         ]
         { onPress = Just msg
-        , label = text "My Button"
+        , label = text buttonText
         }

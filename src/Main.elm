@@ -6,6 +6,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
+import ElementView
 import Html exposing (Html)
 import IntroView
 
@@ -25,7 +26,7 @@ type View
 
 init : Model
 init =
-    { currentView = View1 }
+    { currentView = View2 }
 
 
 view : Model -> Html Msg
@@ -43,7 +44,7 @@ view model =
         (column
             [ width fill, spacing 20 ]
             ([ row [ width fill ]
-                [ Buttons.myButton NoOp ]
+                [ Buttons.myButton "Intro" NoOp ]
              ]
                 ++ mainView
             )
@@ -60,7 +61,7 @@ view1 =
 
 
 view2 =
-    []
+    [ ElementView.view1 ]
 
 
 type Msg
