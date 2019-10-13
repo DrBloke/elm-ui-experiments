@@ -14,26 +14,24 @@ baseSize =
 
 view : Element msg
 view =
-    column [ paddingXY 5 0 ]
-        [ row
-            []
-            [ toColumn group1
-            , el [ alignBottom ] (toColumn group2)
-            , el [ alignBottom ]
-                (column []
-                    [ toRow tm1
-                    , toRow tm2
-                    , toRow tm3
-                    , toRow tm4
-                    ]
-                )
-            , el [ alignBottom ] (toColumn group13)
-            , el [ alignBottom ] (toColumn group14)
-            , el [ alignBottom ] (toColumn group15)
-            , el [ alignBottom ] (toColumn group16)
-            , el [ alignBottom ] (toColumn group17)
-            , el [ alignBottom ] (toColumn group18)
-            ]
+    row
+        [ paddingXY 5 0 ]
+        [ toColumn group1
+        , el [ alignBottom ] (toColumn group2)
+        , el [ alignBottom ]
+            (column []
+                [ toRow tm1
+                , toRow tm2
+                , toRow tm3
+                , toRow tm4
+                ]
+            )
+        , el [ alignBottom ] (toColumn group13)
+        , el [ alignBottom ] (toColumn group14)
+        , el [ alignBottom ] (toColumn group15)
+        , el [ alignBottom ] (toColumn group16)
+        , el [ alignBottom ] (toColumn group17)
+        , el [ alignBottom ] (toColumn group18)
         ]
 
 
