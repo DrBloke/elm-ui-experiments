@@ -205,7 +205,7 @@ atomicNumber aNumber =
             [ Font.typeface "Helvetica"
             , Font.sansSerif
             ]
-        , moveUp (baseSize / 30)
+        , moveUp (baseSize / 50)
         , htmlAttribute <| style "z-index" "+2"
         ]
         (text aNumber)
@@ -221,6 +221,6 @@ elementName elName =
             [ Font.typeface "Helvetica"
             , Font.sansSerif
             ]
-        , moveUp (baseSize / 30)
+        , moveUp (baseSize / 13)
         ]
         (text elName)
