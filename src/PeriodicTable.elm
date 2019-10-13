@@ -14,7 +14,7 @@ baseSize =
 
 view : Element msg
 view =
-    column [ centerX ]
+    column [ paddingXY 5 0 ]
         [ row
             []
             [ toColumn group1
@@ -148,9 +148,16 @@ elementTile eData =
 
         s3 =
             eData.name
+
+        bgColor =
+            if eData.group == Group 5 then
+                rgb255 227 228 229
+
+            else
+                rgb255 227 228 229
     in
     el
-        [ Background.color (rgb255 227 228 219)
+        [ Background.color bgColor
         , Border.width 1
         , height (px (round (baseSize * 1.8)))
         , width (px (round (baseSize * 1.7)))
@@ -161,8 +168,7 @@ elementTile eData =
 elementView1 : String -> String -> String -> Element msg
 elementView1 s1 s2 s3 =
     column
-        [ Background.color (rgb255 227 228 219)
-        , height (px (round (baseSize * 1.64)))
+        [ height (px (round (baseSize * 1.64)))
         , centerX
         , centerY
         ]
@@ -183,7 +189,6 @@ elementSymbol symbol =
             , Font.sansSerif
             ]
         , Font.bold
-        , Background.color (rgb255 227 228 219)
         , moveUp (baseSize / 9)
         , htmlAttribute <| style "z-index" "+1"
         ]
@@ -200,7 +205,6 @@ atomicNumber aNumber =
             [ Font.typeface "Helvetica"
             , Font.sansSerif
             ]
-        , Background.color (rgb255 227 228 219)
         , moveUp (baseSize / 30)
         , htmlAttribute <| style "z-index" "+2"
         ]
@@ -217,7 +221,6 @@ elementName elName =
             [ Font.typeface "Helvetica"
             , Font.sansSerif
             ]
-        , Background.color (rgb255 227 228 219)
         , moveUp (baseSize / 30)
         ]
         (text elName)
