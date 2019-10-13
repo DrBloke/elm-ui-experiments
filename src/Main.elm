@@ -9,6 +9,7 @@ import Element.Font as Font
 import ElementView
 import Html exposing (Html)
 import IntroView
+import PeriodicTable
 
 
 main =
@@ -22,11 +23,12 @@ type alias Model =
 type View
     = View1
     | View2
+    | View3
 
 
 init : Model
 init =
-    { currentView = View2 }
+    { currentView = View3 }
 
 
 view : Model -> Html Msg
@@ -39,12 +41,18 @@ view model =
 
                 View2 ->
                     view2
+
+                View3 ->
+                    view3
     in
     Element.layout []
         (column
             [ width fill, spacing 20 ]
             ([ row [ width fill ]
-                [ Buttons.myButton "Intro" NoOp ]
+                [ Buttons.myButton "Intro" (ChangeView View1)
+                , Buttons.myButton "Font" (ChangeView View2)
+                , Buttons.myButton "Periodic Table" (ChangeView View3)
+                ]
              ]
                 ++ mainView
             )
@@ -64,8 +72,13 @@ view2 =
     [ ElementView.view1 ]
 
 
+view3 =
+    [ PeriodicTable.view ]
+
+
 type Msg
     = NoOp
+    | ChangeView View
 
 
 update : Msg -> Model -> Model
@@ -73,3 +86,6 @@ update msg model =
     case msg of
         NoOp ->
             model
+
+        ChangeView newView ->
+            { model | currentView = newView }
