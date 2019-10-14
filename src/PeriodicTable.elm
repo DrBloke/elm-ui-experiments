@@ -9,7 +9,7 @@ import Html.Attributes exposing (style)
 
 
 baseSize =
-    40
+    30
 
 
 view : Element msg
@@ -126,12 +126,38 @@ elementTile eData =
 
             else
                 rgb255 227 228 229
+
+        borderBottom =
+            if eData.atomicNumber >= 87 || eData.atomicNumber == 39 then
+                1
+
+            else
+                0
+
+        borderRight =
+            case eData.group of
+                Group 18 ->
+                    1
+
+                Group 2 ->
+                    if eData.atomicNumber /= 20 && eData.atomicNumber /= 38 then
+                        1
+
+                    else
+                        0
+
+                _ ->
+                    if eData.atomicNumber == 1 || eData.atomicNumber == 71 || eData.atomicNumber == 103 then
+                        1
+
+                    else
+                        0
     in
     el
         [ Background.color bgColor
+        , Border.widthEach { bottom = borderBottom, left = 1, right = borderRight, top = 1 }
 
-        --, Border.widthEach { bottom = 0, left = 1, right = 0, top = 1 }
-        , Border.width 1
+        --, Border.width 1
         , height (px (round (baseSize * 1.8)))
         , width (px (round (baseSize * 1.7)))
         ]
