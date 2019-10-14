@@ -14,24 +14,33 @@ baseSize =
 
 view : Element msg
 view =
-    row
-        [ paddingXY 5 0 ]
-        [ toColumn (group 1)
-        , el [ alignBottom ] (toColumn (group 2))
-        , el [ alignBottom ]
-            (column []
-                [ toRow (tm 4)
-                , toRow (tm 5)
-                , el [ alignRight ] (toRow (tm 6))
-                , el [ alignRight ] (toRow (tm 7))
-                ]
-            )
-        , el [ alignBottom ] (toColumn (group 13))
-        , el [ alignBottom ] (toColumn (group 14))
-        , el [ alignBottom ] (toColumn (group 15))
-        , el [ alignBottom ] (toColumn (group 16))
-        , el [ alignBottom ] (toColumn (group 17))
-        , el [ alignBottom ] (toColumn (group 18))
+    column
+        [ padding 5
+        , spacing baseSize
+        ]
+        [ row
+            []
+            [ el [ alignBottom ] (toColumn (group 1))
+            , el [ alignBottom ] (toColumn (group 2))
+            , el [ alignBottom ]
+                (column []
+                    [ toRow (tm 4)
+                    , toRow (tm 5)
+                    , el [ alignRight ] (toRow (tm 6))
+                    , el [ alignRight ] (toRow (tm 7))
+                    ]
+                )
+            , el [ alignBottom ] (toColumn (group 13))
+            , el [ alignBottom ] (toColumn (group 14))
+            , el [ alignBottom ] (toColumn (group 15))
+            , el [ alignBottom ] (toColumn (group 16))
+            , el [ alignBottom ] (toColumn (group 17))
+            , el [ alignBottom ] (toColumn (group 18))
+            ]
+        , column [ alignRight ]
+            [ toRow lanthanides
+            , toRow actinides
+            ]
         ]
 
 
@@ -54,27 +63,47 @@ group x =
     List.filter (\el -> el.group == Group x) elementData
 
 
-tmGroups =
-    [ Group 3
-    , Group 4
-    , Group 5
-    , Group 6
-    , Group 7
-    , Group 8
-    , Group 9
-    , Group 10
-    , Group 11
-    , Group 12
-    ]
-
-
 tm : Int -> List ElementData
 tm x =
     List.filter
         (\el ->
             el.period
                 == x
-                && List.member el.group tmGroups
+                && (case el.group of
+                        Group groupNo ->
+                            groupNo >= 3 && groupNo <= 12
+
+                        _ ->
+                            False
+                   )
+        )
+        elementData
+
+
+lanthanides : List ElementData
+lanthanides =
+    List.filter
+        (\el ->
+            case el.group of
+                La _ ->
+                    True
+
+                _ ->
+                    False
+        )
+        elementData
+
+
+actinides : List ElementData
+actinides =
+    List.filter
+        (\el ->
+            case el.group of
+                Ac _ ->
+                    True
+
+                _ ->
+                    False
         )
         elementData
 
