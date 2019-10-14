@@ -16,22 +16,22 @@ view : Element msg
 view =
     row
         [ paddingXY 5 0 ]
-        [ toColumn group1
-        , el [ alignBottom ] (toColumn group2)
+        [ toColumn (group 1)
+        , el [ alignBottom ] (toColumn (group 2))
         , el [ alignBottom ]
             (column []
-                [ toRow tm1
-                , toRow tm2
-                , toRow tm3
-                , toRow tm4
+                [ toRow (tm 4)
+                , toRow (tm 5)
+                , el [ alignRight ] (toRow (tm 6))
+                , el [ alignRight ] (toRow (tm 7))
                 ]
             )
-        , el [ alignBottom ] (toColumn group13)
-        , el [ alignBottom ] (toColumn group14)
-        , el [ alignBottom ] (toColumn group15)
-        , el [ alignBottom ] (toColumn group16)
-        , el [ alignBottom ] (toColumn group17)
-        , el [ alignBottom ] (toColumn group18)
+        , el [ alignBottom ] (toColumn (group 13))
+        , el [ alignBottom ] (toColumn (group 14))
+        , el [ alignBottom ] (toColumn (group 15))
+        , el [ alignBottom ] (toColumn (group 16))
+        , el [ alignBottom ] (toColumn (group 17))
+        , el [ alignBottom ] (toColumn (group 18))
         ]
 
 
@@ -49,36 +49,9 @@ toRow elements =
         (List.map elementTile elements)
 
 
-group1 =
-    List.filter (\el -> el.group == Group 1) elementData
-
-
-group2 =
-    List.filter (\el -> el.group == Group 2) elementData
-
-
-group13 =
-    List.filter (\el -> el.group == Group 13) elementData
-
-
-group14 =
-    List.filter (\el -> el.group == Group 14) elementData
-
-
-group15 =
-    List.filter (\el -> el.group == Group 15) elementData
-
-
-group16 =
-    List.filter (\el -> el.group == Group 16) elementData
-
-
-group17 =
-    List.filter (\el -> el.group == Group 17) elementData
-
-
-group18 =
-    List.filter (\el -> el.group == Group 18) elementData
+group : Int -> List ElementData
+group x =
+    List.filter (\el -> el.group == Group x) elementData
 
 
 tmGroups =
@@ -95,42 +68,13 @@ tmGroups =
     ]
 
 
-tm1 =
+tm : Int -> List ElementData
+tm x =
     List.filter
         (\el ->
             el.period
-                == 4
+                == x
                 && List.member el.group tmGroups
-        )
-        elementData
-
-
-tm2 =
-    List.filter
-        (\el ->
-            el.period
-                == 5
-                && List.member el.group tmGroups
-        )
-        elementData
-
-
-tm3 =
-    List.filter
-        (\el ->
-            el.period
-                == 6
-                && List.member el.group (La 1 :: tmGroups)
-        )
-        elementData
-
-
-tm4 =
-    List.filter
-        (\el ->
-            el.period
-                == 7
-                && List.member el.group (Ac 1 :: tmGroups)
         )
         elementData
 
@@ -156,6 +100,8 @@ elementTile eData =
     in
     el
         [ Background.color bgColor
+
+        --, Border.widthEach { bottom = 0, left = 1, right = 0, top = 1 }
         , Border.width 1
         , height (px (round (baseSize * 1.8)))
         , width (px (round (baseSize * 1.7)))
