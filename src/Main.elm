@@ -10,6 +10,7 @@ import ElementView
 import Html exposing (Html)
 import IntroView
 import PeriodicTable
+import PeriodicTable2
 
 
 main =
@@ -24,6 +25,7 @@ type View
     = View1
     | View2
     | View3
+    | View4
 
 
 init : Model
@@ -44,6 +46,9 @@ view model =
 
                 View3 ->
                     view3
+
+                View4 ->
+                    view4
     in
     Element.layout []
         (column
@@ -52,6 +57,7 @@ view model =
                 [ Buttons.myButton "Intro" (ChangeView View1)
                 , Buttons.myButton "Font" (ChangeView View2)
                 , Buttons.myButton "Periodic Table" (ChangeView View3)
+                , Buttons.myButton "Periodic Table " (ChangeView View4)
                 ]
              ]
                 ++ mainView
@@ -74,6 +80,10 @@ view2 =
 
 view3 =
     [ PeriodicTable.view ]
+
+
+view4 =
+    [ PeriodicTable2.view ]
 
 
 type Msg
