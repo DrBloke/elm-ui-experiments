@@ -22,14 +22,25 @@ view =
             []
             [ el [ alignBottom ] (toColumn (group 1))
             , el [ alignBottom ] (toColumn (group 2))
-            , el [ alignBottom ]
-                (column []
-                    [ toRow (tm 4)
-                    , toRow (tm 5)
-                    , el [ alignRight ] (toRow (tm 6))
-                    , el [ alignRight ] (toRow (tm 7))
-                    ]
-                )
+
+            -- , el [ alignBottom, moveUp 1 ]
+            --     (column []
+            --         [ toRow (tm 4)
+            --         , toRow (tm 5)
+            --         , el [ alignRight ] (toRow (tm 6))
+            --         , el [ alignRight ] (toRow (tm 7))
+            --         ]
+            --     )
+            , column [ alignBottom ] ([ toColumn (group 3) ] ++ [ spacer 1 2 ])
+            , el [ alignBottom ] (toColumn (group 4))
+            , el [ alignBottom ] (toColumn (group 5))
+            , el [ alignBottom ] (toColumn (group 6))
+            , el [ alignBottom ] (toColumn (group 7))
+            , el [ alignBottom ] (toColumn (group 8))
+            , el [ alignBottom ] (toColumn (group 9))
+            , el [ alignBottom ] (toColumn (group 10))
+            , el [ alignBottom ] (toColumn (group 11))
+            , el [ alignBottom ] (toColumn (group 12))
             , el [ alignBottom ] (toColumn (group 13))
             , el [ alignBottom ] (toColumn (group 14))
             , el [ alignBottom ] (toColumn (group 15))
@@ -44,9 +55,22 @@ view =
         ]
 
 
+spacer : Int -> Int -> Element msg
+spacer rowSpan colSpan =
+    column
+        [ Border.widthEach { bottom = 0, left = 0, right = 0, top = 0 }
+
+        --, Border.width 1
+        , height (px (colSpan * round (baseSize * 1.8)))
+        , width (px (rowSpan * round (baseSize * 1.7)))
+        ]
+        [ none ]
+
+
 toColumn elements =
     column
         [ centerX
+        , width (px (round (baseSize * 1.7)))
         ]
         (List.map elementTile elements)
 
@@ -54,6 +78,7 @@ toColumn elements =
 toRow elements =
     row
         [ centerX
+        , height (px (round (baseSize * 1.8)))
         ]
         (List.map elementTile elements)
 
@@ -128,11 +153,19 @@ elementTile eData =
                 rgb255 227 228 229
 
         borderBottom =
-            if eData.atomicNumber >= 87 || eData.atomicNumber == 39 then
-                1
+            case eData.group of
+                Group _ ->
+                    if eData.atomicNumber >= 87 || eData.atomicNumber == 39 then
+                        1
 
-            else
-                0
+                    else
+                        0
+
+                La _ ->
+                    0
+
+                Ac _ ->
+                    1
 
         borderRight =
             case eData.group of
@@ -158,8 +191,8 @@ elementTile eData =
         , Border.widthEach { bottom = borderBottom, left = 1, right = borderRight, top = 1 }
 
         --, Border.width 1
-        , height (px (round (baseSize * 1.8)))
-        , width (px (round (baseSize * 1.7)))
+        , height (px (round (baseSize * 1.8) + borderBottom))
+        , width (px (round (baseSize * 1.7) + borderRight))
         ]
         (elementView1 s1 s2 s3)
 
@@ -188,7 +221,7 @@ elementSymbol symbol =
             , Font.sansSerif
             ]
         , Font.bold
-        , moveUp (baseSize / 9)
+        , moveUp (baseSize / 30)
         , htmlAttribute <| style "z-index" "+1"
         ]
         (text symbol)
@@ -204,7 +237,7 @@ atomicNumber aNumber =
             [ Font.typeface "Helvetica"
             , Font.sansSerif
             ]
-        , moveUp (baseSize / 50)
+        , moveDown (baseSize / 30)
         , htmlAttribute <| style "z-index" "+2"
         ]
         (text aNumber)
@@ -214,12 +247,12 @@ elementName : String -> Element msg
 elementName elName =
     el
         [ centerX
-        , Font.size (round (baseSize / 4))
+        , Font.size (round (baseSize / 4.05))
         , Font.color (rgb255 143 101 147)
         , Font.family
             [ Font.typeface "Helvetica"
             , Font.sansSerif
             ]
-        , moveUp (baseSize / 13)
+        , moveDown (baseSize / 15)
         ]
         (text elName)

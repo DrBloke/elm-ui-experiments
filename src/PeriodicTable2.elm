@@ -9,7 +9,7 @@ import Html.Attributes exposing (style)
 
 
 baseSize =
-    40
+    30
 
 
 view : Element msg
@@ -18,57 +18,66 @@ view =
         [ padding 5
         , spacing baseSize
         ]
-        [ row
-            []
-            [ column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 1))
-            , column
-                [ centerX, alignBottom ]
-                (leftBorder :: List.map elementTile (group 2))
-            , el [ alignBottom ]
-                (column []
-                    [ leftBorder
-                    , leftBorder
-                    , row
-                        [ centerX ]
-                        (List.map elementTile (tm 4))
-                    , row
-                        [ centerX ]
-                        (List.map elementTile (tm 5))
-                    , row
-                        [ alignRight ]
-                        (topLeftBorder :: List.map elementTile (tm 6))
-                    , row
-                        [ alignRight ]
-                        (leftBorderWide :: List.map elementTile (tm 7))
-                    ]
+        [ column [ padding 0, spacing 0 ]
+            [ row
+                []
+                [ column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 1))
+                , column
+                    [ centerX, alignBottom ]
+                    (leftBorder :: List.map elementTile (group 2))
+                , el [ alignBottom ]
+                    (column []
+                        [ leftBorder
+                        , leftBorder
+                        , row
+                            [ centerX ]
+                            (List.map elementTile (tm 4))
+                        , row
+                            [ centerX ]
+                            (List.map elementTile (tm 5))
+                        , row
+                            [ alignRight ]
+                            (topLeftBorder :: List.map elementTile (tm 6))
+                        , row
+                            [ alignRight ]
+                            (leftBorderWide :: List.map elementTile (tm 7))
+                        ]
+                    )
+                , column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 13))
+                , column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 14))
+                , column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 15))
+                , column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 16))
+                , column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 17))
+                , column
+                    [ centerX, alignBottom ]
+                    (List.map elementTile (group 18))
+                , column
+                    [ centerX ]
+                    (List.repeat 7 leftBorder)
+                ]
+            , row []
+                (List.repeat 2 topBorder
+                    ++ [ blankWidth ]
+                    ++ List.repeat 15 topBorder
                 )
-            , column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 13))
-            , column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 14))
-            , column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 15))
-            , column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 16))
-            , column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 17))
-            , column
-                [ centerX, alignBottom ]
-                (List.map elementTile (group 18))
-            , column
-                [ centerX ]
-                (List.repeat 7 leftBorder)
             ]
         , column [ alignRight ]
-            [ toRow lanthanides
-            , toRow actinides
+            [ row [] (toRow lanthanides :: [ leftBorder ])
+            , row [] (toRow actinides :: [ leftBorder ])
+            , row []
+                (List.repeat 15 topBorder)
             ]
         ]
 
@@ -94,6 +103,15 @@ leftBorderWide =
 
 
 topBorder =
+    el
+        [ height (px 0)
+        , width (px (round (baseSize * 1.7)))
+        , Border.widthEach { bottom = 0, left = 0, right = 0, top = 1 }
+        ]
+        (text "")
+
+
+blankWidth =
     el
         [ height (px 0)
         , width (px (round (baseSize * 1.7)))
