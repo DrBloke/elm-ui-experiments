@@ -9,6 +9,7 @@ import Element.Font as Font
 import ElementView
 import Html exposing (Html)
 import IntroView
+import IrregularGrid
 import PeriodicTable
 import PeriodicTable2
 
@@ -26,11 +27,12 @@ type View
     | View2
     | View3
     | View4
+    | View5
 
 
 init : Model
 init =
-    { currentView = View3 }
+    { currentView = View5 }
 
 
 view : Model -> Html Msg
@@ -49,6 +51,9 @@ view model =
 
                 View4 ->
                     view4
+
+                View5 ->
+                    view5
     in
     Element.layout []
         (column
@@ -56,8 +61,9 @@ view model =
             ([ row [ width fill ]
                 [ Buttons.myButton "Intro" (ChangeView View1)
                 , Buttons.myButton "Font" (ChangeView View2)
-                , Buttons.myButton "Periodic Table" (ChangeView View3)
-                , Buttons.myButton "Periodic Table " (ChangeView View4)
+                , Buttons.myButton "PT 1" (ChangeView View3)
+                , Buttons.myButton "PT 2" (ChangeView View4)
+                , Buttons.myButton "Irregular Grid " (ChangeView View5)
                 ]
              ]
                 ++ mainView
@@ -84,6 +90,10 @@ view3 =
 
 view4 =
     [ PeriodicTable2.view ]
+
+
+view5 =
+    [ IrregularGrid.view ]
 
 
 type Msg
